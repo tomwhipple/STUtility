@@ -6,10 +6,14 @@
  *
  */
 
+#ifndef debugLog
+
 #ifdef DEBUG
-#define debugLog(x,...)	NSLog(x,##__VA_ARGS__)
+#define debugLog(x, ...)	NSLog(x,##__VA_ARGS__)
 #else
-#define debugLog( x, ... )
+#define debugLog(x, ...)
+#endif
+
 #endif
 
 #define boolString(x) ((x)?@"YES":@"NO")

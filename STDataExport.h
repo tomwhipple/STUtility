@@ -1,6 +1,5 @@
 //
 //  STDataExport.h
-//  TourPlayer
 //
 //  Created by Tom Whipple on 1/8/12.
 //  Copyright (c) 2012 Smartovation Technologies, LLC. All rights reserved.

@@ -14,5 +14,10 @@
 
 @end
 
+#ifdef DEBUG
+#define debugLog(x, ...) [STDebugLogFile logToFile: [NSString stringWithFormat:x, ##__VA_ARGS__]]
+#else
+#define debugLog(x, ...)
+#endif
 
-#define debugLog(x, ...) [NSString stringWithFormat:x, ##__VA_ARGS__]
+#define errorLog(x, ...) [STDebugLogFile logToFile: [NSString stringWithFormat:x, ##__VA_ARGS__]]

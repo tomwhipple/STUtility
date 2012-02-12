@@ -13,28 +13,27 @@
 static NSString* logFilePath = nil;
 
 +(void)setLogFile:(NSString*) filename {
-#ifdef DEBUG
   NSString* directoryPath = [[[[NSFileManager defaultManager] URLsForDirectory:NSDesktopDirectory inDomains:NSUserDomainMask] lastObject] path];
   logFilePath = [[directoryPath stringByAppendingPathComponent:filename] retain];
-#endif
 }
 
 +(void)logToFile:(NSString*) message {
-#ifdef DEBUG
   if (logFilePath) {
-    NSString* timestampedMessage = [NSString stringWithFormat:@"%@\t%@",[NSDate date], message];
+    NSString* timestampedMessage = [NSString stringWithFormat:@"%@\t%@\n",[NSDate date], message];
+    NSData* messageData = [timestampedMessage dataUsingEncoding:NSUTF8StringEncoding];
     
-    NSFileHandle *output = [NSFileHandle fileHandleForWritingAtPath:logFilePath];
-    [output seekToEndOfFile];
-    [output writeData:[timestampedMessage dataUsingEncoding:NSUTF8StringEncoding]];
-    [output closeFile];
+    if (![[NSFileManager defaultManager] fileExistsAtPath:logFilePath]) {
+      [[NSFileManager defaultManager] createFileAtPath:logFilePath contents:messageData attributes:nil];
+    }
+    else {
+      NSFileHandle *output = [NSFileHandle fileHandleForWritingAtPath:logFilePath];
+      [output seekToEndOfFile];
+      [output writeData:messageData];
+      [output closeFile];
+    }
   }
-  else {
-    NSLog(@"%@",message); // format to silance warning
-  }
-#endif
+  // log all messages to the console, in addition to the error log
+  NSLog(@"%@",message); // format to silance warning
 }
-
-
 
 @end

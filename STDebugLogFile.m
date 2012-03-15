@@ -13,7 +13,7 @@
 static NSString* logFilePath = nil;
 
 +(void)setLogFile:(NSString*) filename {
-  NSString* directoryPath = [[[[NSFileManager defaultManager] URLsForDirectory:NSDesktopDirectory inDomains:NSUserDomainMask] lastObject] path];
+  NSString* directoryPath = [NSHomeDirectory() stringByAppendingPathComponent:@"Desktop"];
   logFilePath = [[directoryPath stringByAppendingPathComponent:filename] retain];
 }
 

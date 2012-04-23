@@ -13,8 +13,27 @@
 static NSString* logFilePath = nil;
 
 +(void)setLogFile:(NSString*) filename {
-  NSString* directoryPath = [NSHomeDirectory() stringByAppendingPathComponent:@"Desktop"];
+  NSString* directoryPath = NSTemporaryDirectory();
+  if (!directoryPath) directoryPath = @"/tmp";
   logFilePath = [[directoryPath stringByAppendingPathComponent:filename] retain];
+}
+
++(NSString*) logPath {
+  return [[logFilePath copy] autorelease];
+}
+
+#ifdef DEBUG
+static BOOL loggingEnabled = YES;
+#else
+static BOOL loggingEnabled = NO;
+#endif
+
++(void) setLoggingEnabled:(BOOL) shouldEnable {
+  loggingEnabled = shouldEnable;
+}
+
++(BOOL) isLoggingEnabled {
+  return loggingEnabled;
 }
 
 +(void)logToFile:(NSString*) message {

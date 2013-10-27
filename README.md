@@ -8,9 +8,10 @@ A collection of miscellaneous scripts, headers and classes that have proven to b
 It is invariably useful to have log statements that print only for debug builds.
 
 Simply:
+
 1. Set up DEBUG to be defined for your project's debug configuration.
-2. #include STDebug.h
-3. Use debugLog() just as you would NSLog(). The only difference is that if DEBUG is not defined, the logging won't be used.
+2. `#include STDebug.h`
+3. Use `debugLog()` just as you would `NSLog()`. The only difference is that if DEBUG is not defined, the logging won't be used.
 
 ### Other string support
 
